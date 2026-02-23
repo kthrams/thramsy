@@ -1,26 +1,52 @@
-import type { Metadata } from "next";
-import { Domine } from "next/font/google";
-import "./globals.css";
+import type { Metadata, Viewport } from 'next'
+import { Domine } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/next'
+import './globals.css'
 
 const domine = Domine({
-  variable: "--font-domine",
-  subsets: ["latin"],
-});
+  subsets: ['latin'],
+  variable: '--font-domine',
+})
 
 export const metadata: Metadata = {
-  title: "Kevin Hu-Thrams",
-  description:
-    "Builder, maker, and explorer. PM in fintech turned AI and consumer tinkerer based in the Bay Area.",
-};
+  title: 'Kevin Hu-Thrams',
+  description: 'Builder, maker, and explorer. PM in fintech turned AI and consumer tinkerer based in the Bay Area.',
+  icons: {
+    icon: [
+      {
+        url: '/icon-light-32x32.png',
+        media: '(prefers-color-scheme: light)',
+      },
+      {
+        url: '/icon-dark-32x32.png',
+        media: '(prefers-color-scheme: dark)',
+      },
+      {
+        url: '/icon.svg',
+        type: 'image/svg+xml',
+      },
+    ],
+    apple: '/apple-icon.png',
+  },
+}
+
+export const viewport: Viewport = {
+  themeColor: '#ffffff',
+  width: 'device-width',
+  initialScale: 1,
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html lang="en">
-      <body className={`${domine.variable} antialiased`}>{children}</body>
+      <body className={`${domine.variable} font-sans antialiased`}>
+        {children}
+        <Analytics />
+      </body>
     </html>
-  );
+  )
 }
