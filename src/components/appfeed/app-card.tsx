@@ -12,16 +12,18 @@ import {
   TrendingUp,
   Bot,
   Code,
+  Maximize2,
 } from "lucide-react"
 import { type AppPost, getBuilder, formatNumber } from "@/lib/appfeed-data"
 
 interface AppCardProps {
   app: AppPost
   onOpen: (app: AppPost) => void
+  onFullscreen?: () => void
   size?: "normal" | "large"
 }
 
-export function AppCard({ app, onOpen, size = "normal" }: AppCardProps) {
+export function AppCard({ app, onOpen, onFullscreen, size = "normal" }: AppCardProps) {
   const [liked, setLiked] = useState(false)
   const [saved, setSaved] = useState(false)
   const [likeCount, setLikeCount] = useState(app.likes)
@@ -84,8 +86,20 @@ export function AppCard({ app, onOpen, size = "normal" }: AppCardProps) {
           </div>
         )}
 
-        {/* Hover overlay */}
+        {/* Hover overlay with fullscreen button */}
         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
+        {onFullscreen && app.previewType === "interactive" && (
+          <button
+            onClick={(e) => {
+              e.stopPropagation()
+              onFullscreen()
+            }}
+            className={`absolute ${app.featured ? "top-10" : "top-3"} right-3 p-1.5 rounded-lg bg-black/30 backdrop-blur-sm text-white opacity-0 group-hover:opacity-100 transition-opacity hover:bg-black/50`}
+            title="View fullscreen"
+          >
+            <Maximize2 className="w-3.5 h-3.5" />
+          </button>
+        )}
       </div>
 
       {/* Card Content */}

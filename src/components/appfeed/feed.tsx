@@ -18,7 +18,8 @@ import { CategoryBar } from "./category-bar"
 import { BuilderSpotlight } from "./builder-spotlight"
 import { PostAppModal } from "./post-app-modal"
 import { BuilderProfileModal } from "./builder-profile-modal"
-import { Plus, Search, Bell, User, Sparkles, Zap } from "lucide-react"
+import { FullscreenDiscover } from "./fullscreen-discover"
+import { Plus, Search, Bell, User, Sparkles, Zap, Maximize2 } from "lucide-react"
 
 type FilterType = AppCategory | "all" | "trending" | "ai-created" | "featured"
 
@@ -29,6 +30,7 @@ export function Feed() {
   const [selectedBuilder, setSelectedBuilder] = useState<Builder | null>(null)
   const [searchQuery, setSearchQuery] = useState("")
   const [showSearch, setShowSearch] = useState(false)
+  const [fullscreenIndex, setFullscreenIndex] = useState<number | null>(null)
 
   const filteredApps = useMemo(() => {
     let apps: AppPost[]
@@ -186,6 +188,13 @@ export function Feed() {
                 >
                   See AI Creations
                 </button>
+                <button
+                  onClick={() => setFullscreenIndex(0)}
+                  className="px-5 py-2 bg-white/20 text-white rounded-full text-sm font-medium hover:bg-white/30 transition-colors border border-white/30 flex items-center gap-1.5"
+                >
+                  <Maximize2 className="w-3.5 h-3.5" />
+                  Immersive Mode
+                </button>
               </div>
             </div>
             {/* Background decoration */}
@@ -219,6 +228,7 @@ export function Feed() {
               <AppCard
                 app={app}
                 onOpen={setSelectedApp}
+                onFullscreen={() => setFullscreenIndex(i)}
                 size={getCardSize(app, i)}
               />
             </div>
@@ -254,6 +264,15 @@ export function Feed() {
 
       {/* Builder profile modal */}
       <BuilderProfileModal builder={selectedBuilder} onClose={() => setSelectedBuilder(null)} />
+
+      {/* Fullscreen discovery mode (TikTok-style) */}
+      {fullscreenIndex !== null && (
+        <FullscreenDiscover
+          apps={filteredApps}
+          startIndex={fullscreenIndex}
+          onClose={() => setFullscreenIndex(null)}
+        />
+      )}
     </div>
   )
 }
