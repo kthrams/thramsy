@@ -13,32 +13,37 @@ interface Project {
   short: string
   full: string
   url?: string
+  builtWith?: string
 }
 
 const projects: Project[] = [
   {
     title: "Fairway",
     short: "Golf scorecard app",
-    full: "A mobile-friendly golf scorecard and handicap tracker. Built with React, TypeScript, and Supabase using the Lovable app builder. Designed to be fast and easy to use on the course.",
+    full: "A mobile-friendly golf scorecard with real USGA handicap calculations, multiple game modes, and round history. Built to see how far an AI app builder could take a real sports utility.",
     url: "https://www.golf-the-fair-way.com/",
+    builtWith: "Lovable",
   },
   {
     title: "Arena",
-    short: "Fantasy sports app",
-    full: "A fantasy sports app originally built for football season, now being adapted for basketball. Pulls live data from the Sleeper API and lets you set lineups and track scores in real time.",
+    short: "Fantasy sports side-betting app",
+    full: "A side-betting layer for Sleeper fantasy football leagues — place bets on weekly matchups with friends. Built to explore real-time API integrations and multi-user flows with AI tooling.",
     url: "https://fantasy-arena.lovable.app/",
+    builtWith: "Lovable",
   },
   {
     title: "contacts-db",
     short: "Founder/investor CRM",
-    full: "A personal CRM for managing a network of founders and investors, with AI-powered contact tagging built on Claude. Built with Next.js, Supabase, and shadcn/ui — live and in active use.",
+    full: "A personal CRM that auto-tags founders and investors from LinkedIn imports and suggests introductions between them. My first fully AI-coded app from scratch.",
     url: "https://contacts-db.thramsy.com/",
+    builtWith: "Claude Code",
   },
   {
     title: "Spenduh",
     short: "Daily expense tracker",
-    full: "A simple daily expense tracker for staying on top of spending habits. Built with React, TypeScript, Tailwind, and Supabase.",
+    full: "A daily expense tracker with spending streaks, calendar heat maps, and analytics. Built to compare AI code generators side-by-side.",
     url: "https://spenduh.thramsy.com/",
+    builtWith: "Bolt",
   },
 ]
 
@@ -53,9 +58,16 @@ export function ProjectCards() {
         >
           <AccordionTrigger className="hover:no-underline py-4">
             <div className="flex flex-col gap-1 text-left">
-              <span className="text-foreground font-medium text-base">
-                {project.title}
-              </span>
+              <div className="flex items-center gap-2">
+                <span className="text-foreground font-medium text-base">
+                  {project.title}
+                </span>
+                {project.builtWith && (
+                  <span className="text-[10px] uppercase tracking-wider text-muted-foreground/70 border border-border rounded-full px-2 py-0.5 font-medium">
+                    {project.builtWith}
+                  </span>
+                )}
+              </div>
               <span className="text-muted-foreground text-sm font-normal">
                 {project.short}
               </span>

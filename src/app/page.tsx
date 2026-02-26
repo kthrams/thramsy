@@ -27,12 +27,17 @@ export default function Page() {
           <h1 className="text-2xl font-semibold text-foreground mb-5 text-balance">
             Kevin Hu-Thrams
           </h1>
-          <p className="text-base text-muted-foreground leading-relaxed">
+          <p className="text-base text-muted-foreground leading-relaxed mb-4">
             Originally born &amp; raised in Germany, I moved to the Bay Area in
             2017 to learn and build alongside the best. Historically a Fintech
             PM, I{"'"}m now exploring new business ideas across AI, consumer and
-            sports. When I{"'"}m not researching, I{"'"}m experimenting with new
-            technologies to uplevel my builder toolbox. Let{"'"}s connect!
+            sports.
+          </p>
+          <p className="text-base text-muted-foreground leading-relaxed">
+            The projects below are experiments I built using AI tools like
+            Claude Code, Lovable, and Bolt — from idea to deployed app, with
+            zero hand-written code. Each one was a way to stress-test what{"'"}s
+            possible when a PM picks up AI as a building tool. Let{"'"}s connect!
           </p>
         </section>
 
